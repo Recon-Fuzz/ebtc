@@ -1466,4 +1466,13 @@ abstract contract TargetFunctions is Properties {
             cdpManager.setRedemptionsPaused(value == 1 ? true : false);
         }
     }
+
+    ///////////////////////////////////////////////////////
+    // Governance
+    ///////////////////////////////////////////////////////
+
+    function call(address target, uint256 value, bytes memory data) public {
+        (bool success, ) = target.call{ value: value }(data);
+        require(success, "Call failed");
+    }
 }
