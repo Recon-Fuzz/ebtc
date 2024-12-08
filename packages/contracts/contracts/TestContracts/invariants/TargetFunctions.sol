@@ -1468,10 +1468,11 @@ abstract contract TargetFunctions is Properties {
     }
 
     ///////////////////////////////////////////////////////
-    // Governance
+    // Aribrary call
     ///////////////////////////////////////////////////////
 
     function call(address target, uint256 value, bytes memory data) public {
+        hevm.prank(defaultGovernance);
         (bool success, ) = target.call{ value: value }(data);
         require(success, "Call failed");
     }
